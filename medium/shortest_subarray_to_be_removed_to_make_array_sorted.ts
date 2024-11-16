@@ -29,6 +29,11 @@ Constraints:
 
 1 <= arr.length <= 105
 0 <= arr[i] <= 109
+* vì chỉ được cắt một chuỗi con -> tìm dãy tăng dần ở đầu hoặc cuối của mảng
+* -> sau khi đã tìm được dãy tăng dần, tìm vị trí ở phía ngược lại thỏa mãn 2 điêù kiện: 
+* 1 là ở phía đó cũng tạo được dãy tăng dần
+* 2 là khi kết hợp với dãy được tìm từ trước cũng tạo thành dãy tăng dần
+* tìm min = cách lấy vị trí đầu tiên của dãy phải trừ đi vị trí cuối cùng của dãy trái
 */
 
 function findLengthOfShortestSubarray(arr: number[]): number {
