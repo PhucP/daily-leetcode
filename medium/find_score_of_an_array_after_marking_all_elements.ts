@@ -45,36 +45,39 @@ function findScore(nums: number[]): number {
   }
 
   queue.sort((a, b) => {
-    return a[1] - b[1];
+    if (a[1] === b[1]) {
+      return a[0] - b[0];
+    }
+    return b[1] - a[1];
   });
 
   let result = 0;
 
-  for (let i = 0; i < queue.length; i++) {
-    if (checkUse[queue[i][0]]) continue;
-    else {
-      result += queue[i][1];
-      checkUse[queue[i][0]] = true;
-      let left = Math.max(queue[i][0] - 1, 0);
-      let right = Math.min(queue[i][0] + 1, nums.length - 1);
-      checkUse[left] = true;
-      checkUse[right] = true;
-    }
-  }
-
-  //   while (queue.length > 0) {
-  //     let top = queue.shift() ?? [0, 0];
-  //     if (checkUse[top[0]]) continue;
+  //   for (let i = 0; i < queue.length; i++) {
+  //     if (checkUse[queue[i][0]]) continue;
   //     else {
-  //       result += top[1];
-  //       checkUse[top[0]] = true;
-  //       let left = Math.max(top[0] - 1, 0);
-  //       let right = Math.min(top[0] + 1, nums.length - 1);
+  //       result += queue[i][1];
+  //       checkUse[queue[i][0]] = true;
+  //       let left = Math.max(queue[i][0] - 1, 0);
+  //       let right = Math.min(queue[i][0] + 1, nums.length - 1);
   //       checkUse[left] = true;
   //       checkUse[right] = true;
-  //       //console.log(`t: ${top[0]}  l: ${left} r: ${right}`);
   //     }
   //   }
+
+  while (queue.length > 0) {
+    let top = queue.pop() ?? [0, 0];
+    if (checkUse[top[0]]) continue;
+    else {
+      result += top[1];
+      checkUse[top[0]] = true;
+      let left = Math.max(top[0] - 1, 0);
+      let right = Math.min(top[0] + 1, nums.length - 1);
+      checkUse[left] = true;
+      checkUse[right] = true;
+      //console.log(`t: ${top[0]}  l: ${left} r: ${right}`);
+    }
+  }
 
   console.log(result);
   return result;
