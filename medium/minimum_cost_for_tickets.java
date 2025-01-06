@@ -46,22 +46,21 @@ import java.util.Arrays;
 class Solution {
     public int mincostTickets(int[] days, int[] costs) {
         int lastDay = days[days.length - 1];
-        int dp[] = new int[lastDay +1];
+        int dp[] = new int[lastDay + 1];
         Arrays.fill(dp, 0);
 
         int i = 0;
-        for(int day = 1; day <= lastDay; day++) {
-            if(day < days[i]) {
+        for (int day = 1; day <= lastDay; day++) {
+            if (day < days[i]) {
                 dp[day] = dp[day - 1];
-            }
-            else {
+            } else {
                 dp[day] = Math.min(
-                    (Math.min(
-                        dp[day - 1] + costs[0], 
-                        dp[Math.max(0, day - 7)] + costs[1])), 
-                    dp[Math.max(0, day - 30)] + costs[2]);
-                
-                    i++;
+                        (Math.min(
+                                dp[day - 1] + costs[0],
+                                dp[Math.max(0, day - 7)] + costs[1])),
+                        dp[Math.max(0, day - 30)] + costs[2]);
+
+                i++;
             }
         }
         return dp[lastDay];
