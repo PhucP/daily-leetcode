@@ -48,7 +48,7 @@ function wordSubsets(words1: string[], words2: string[]): string[] {
       }
     }
   }
-  const res = [];
+  const res: string[] = [];
   for (let i = 0; i < words1.length; i++) {
     let temp_arr = new Array(26).fill(0);
     for (let j = 0; j < words1[i].length; j++) {
